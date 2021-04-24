@@ -103,3 +103,47 @@ modeloL3
 prediccionL1
 prediccionL2
 prediccionL3
+
+                      
+#Modelo radial 
+modeloR1 = svm(grupo~., data=train, cost=1, kernel="radial")
+modeloR2 = svm(grupo~., data=train, cost=50,kernel="radial")
+modeloR3 = svm(grupo~., data=train, cost=10, kernel="radial")
+
+prediccionR1<-predict(modeloR1,newdata=test[,1:11])
+prediccionR2<-predict(modeloR2,newdata=test[,1:11])
+prediccionR3<-predict(modeloR3,newdata=test[,1:11])
+
+confusionMatrix(test$grupo,prediccionR1)
+confusionMatrix(test$grupo,prediccionR2)
+confusionMatrix(test$grupo,prediccionR3)
+
+modeloR1
+modeloR2
+modeloR3
+
+prediccionR1
+prediccionR2
+prediccionR3
+
+
+#Modelo polinomial
+modeloP1 = svm(grupo~., data=train, cost=50, gamma=3, kernel="polynomial", degree = 2)
+modeloP2 = svm(grupo~., data=train, cost=50, gamma=3, kernel="polynomial", degree = 3)
+modeloP3 = svm(grupo~., data=train, cost=50, gamma=3, kernel="polynomial", degree = 4)
+
+prediccionP1<-predict(modeloP1,newdata=test[,1:11])
+prediccionP2<-predict(modeloP2,newdata=test[,1:11])
+prediccionP3<-predict(modeloP3,newdata=test[,1:11])
+
+confusionMatrix(test$grupo,prediccionP1)
+confusionMatrix(test$grupo,prediccionP2)
+confusionMatrix(test$grupo,prediccionP3)
+
+modeloP1
+modeloP2
+modeloP3
+
+prediccionP1
+prediccionP2
+prediccionP3
