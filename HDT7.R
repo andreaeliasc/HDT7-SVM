@@ -68,3 +68,18 @@ test<-datos[-corte,]
 head(train)
 
 head(test)
+
+modelo.nn2 <- nnet(grupo~.,data = train[,c(1:5,7)], size=6, rang=0.0000001,
+                   decay=5e-4, maxit=500) 
+modelo.nn2
+
+
+prediccion2 <- as.data.frame(predict(modelo.nn2, newdata = test[,1:5]))
+columnaMasAlta<-apply(prediccion2, 1, function(x) colnames(prediccion2)[which.max(x)])
+columnaMasAlta
+test$prediccion2<-columnaMasAlta #Se le añade al grupo de prueba el valor de la predicción
+head(test, 30)
+
+
+cfm<-confusionMatrix(as.factor(test$prediccion2),test$grupo)
+cfm
