@@ -83,3 +83,23 @@ head(test, 30)
 
 cfm<-confusionMatrix(as.factor(test$prediccion2),test$grupo)
 cfm
+
+modeloL1 = svm(grupo~., data=train, cost=100, gamma=1, kernel="linear")
+modeloL2 = svm(grupo~., data=train, cost=100, gamma=2, kernel="linear")
+modeloL3 = svm(grupo~., data=train, cost=10, gamma=3, kernel="linear")
+
+prediccionL1<-predict(modeloL1,newdata=test[,1:8])
+prediccionL2<-predict(modeloL2,newdata=test[,1:8])
+prediccionL3<-predict(modeloL3,newdata=test[,1:8])
+
+confusionMatrix(test$grupo,prediccionL1)
+confusionMatrix(test$grupo,prediccionL2)
+confusionMatrix(test$grupo,prediccionL3)
+
+modeloL1
+modeloL2
+modeloL3
+
+prediccionL1
+prediccionL2
+prediccionL3
